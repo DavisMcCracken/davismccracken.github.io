@@ -1,6 +1,6 @@
 /* Import Fonts */
 @import url("fontawesome-all.min.css");
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lato:wght@300;400;500&display=swap');
 
 /* Reset Styles */
 /* ... (Keep your existing reset styles here) ... */
@@ -8,7 +8,7 @@
 /* Basic Styles */
 
 body, input, textarea, select {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Lato', sans-serif;
     font-weight: 300;
     color: #E0E0E0;
     font-size: 14pt;
@@ -73,7 +73,7 @@ hr {
 /* Buttons */
 
 .button {
-    background-color: #64B5F6;
+    background-color: #3575a9;
     color: #1E1E1E;
     border: none;
     padding: 0.65em 1.5em;
@@ -86,7 +86,7 @@ hr {
 }
 
 .button:hover {
-    background-color: #90CAF9;
+    background-color: #184365;
 }
 
 .button.alt {
@@ -122,7 +122,7 @@ section {
 }
 
 #footer a {
-    color: #64B5F6;
+    color: #3575a9;
 }
 
 #footer a:hover {
@@ -238,7 +238,7 @@ form :-ms-input-placeholder {
 .skill-item i {
     font-size: 3em;
     margin-bottom: 10px;
-    color: #64B5F6;
+    color: #3575a9;
 }
 
 .skill-item span {
