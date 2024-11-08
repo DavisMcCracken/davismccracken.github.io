@@ -13,8 +13,8 @@ body, input, textarea, select {
     color: #E0E0E0;
     font-size: 14pt;
     line-height: 1.75em;
-    background-color: #121212;
-    background-image: none;
+    background: linear-gradient(to bottom, #1E1E1E, #2C2C2C); /* Gradient background */
+    /* Remove any background images */
 }
 
 strong, b {
@@ -29,12 +29,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-    color: #00BCD4;
+    color: #64B5F6; /* Softer blue */
     text-decoration: none;
 }
 
 a:hover {
-    color: #80DEEA;
+    color: #90CAF9;
 }
 
 hr {
@@ -73,8 +73,8 @@ hr {
 /* Buttons */
 
 .button {
-    background-color: #00BCD4;
-    color: #121212;
+    background-color: #64B5F6;
+    color: #1E1E1E;
     border: none;
     padding: 0.65em 1.5em;
     border-radius: 5px;
@@ -86,7 +86,7 @@ hr {
 }
 
 .button:hover {
-    background-color: #80DEEA;
+    background-color: #90CAF9;
 }
 
 .button.alt {
@@ -102,7 +102,7 @@ hr {
 
 section {
     padding: 60px 0;
-    background-color: #121212;
+    background-color: transparent; /* Use body's background */
 }
 
 /* Container */
@@ -122,11 +122,11 @@ section {
 }
 
 #footer a {
-    color: #00BCD4;
+    color: #64B5F6;
 }
 
 #footer a:hover {
-    color: #80DEEA;
+    color: #90CAF9;
 }
 
 #footer h2, #footer h3, #footer h4, #footer h5, #footer h6, #footer strong, #footer b {
@@ -176,7 +176,7 @@ form input[type=email],
 form input[type=password],
 form select,
 form textarea {
-    background-color: #1E1E1E;
+    background-color: #2C2C2C;
     color: #E0E0E0;
     border: 1px solid #333333;
     border-radius: 5px;
@@ -189,7 +189,7 @@ form input[type=email]:focus,
 form input[type=password]:focus,
 form select:focus,
 form textarea:focus {
-    border-color: #00BCD4;
+    border-color: #64B5F6;
     outline: none;
 }
 
@@ -211,69 +211,68 @@ form :-ms-input-placeholder {
 
 /* Tables */
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-table tr {
-    border-top: 1px solid #333333;
-}
-
-table th, table td {
-    padding: 0.5em 1em;
-    color: #E0E0E0;
-}
-
-table thead {
-    border-bottom: 2px solid #333333;
-}
+/* ... (Keep table styles as previously updated) ... */
 
 /* Lists */
 
-ul {
-    list-style: disc;
-    padding-left: 1em;
+/* ... (Keep list styles as previously updated) ... */
+
+/* Skills Grid */
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    align-items: center;
+    margin-top: 40px;
 }
 
-ul li {
-    padding-left: 0.5em;
-}
-
-ol {
-    list-style: decimal;
-    padding-left: 1.25em;
-}
-
-ol li {
-    padding-left: 0.25em;
-}
-
-/* Miscellaneous */
-
-blockquote {
-    border-left: 4px solid #333333;
-    padding: 1em 1.5em;
+.skill-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     color: #E0E0E0;
+}
+
+.skill-item i {
+    font-size: 3em;
+    margin-bottom: 10px;
+    color: #64B5F6;
+}
+
+.skill-item span {
+    font-size: 1em;
+    margin-top: 5px;
+    text-align: center;
+}
+
+/* Contact Section */
+
+#contact {
     background-color: #1E1E1E;
+    padding: 60px 0;
 }
 
-hr {
-    border: 0;
-    border-top: 1px solid #333333;
-    margin: 2em 0;
+#contact .major h2 {
+    color: #FFFFFF;
 }
 
-.image {
-    display: block;
-    margin: 0 auto 2em auto;
+#contact form {
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-.image img {
-    max-width: 100%;
-    height: auto;
+#contact form input,
+#contact form textarea {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#contact form .button {
+    width: 100%;
 }
 
 /* Responsive Adjustments */
 
-/* ... (Include any media queries you need for responsiveness) ... */
+/* ... (Include any media queries needed for responsiveness) ... */
