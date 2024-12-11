@@ -1,149 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Davis McCracken</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- CSS -->
-    <link rel="stylesheet" href="assets/css/main.css">
-    <!-- Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Personal portfolio of [Your Name]. Resume, projects, and contact info."/>
+  <title>[Your Name] | Portfolio</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap">
 </head>
 <body>
-    <!-- Header -->
-    <section id="header">
-        <div class="container">
-            <div class="header-content">
-                <!-- Profile Photo -->
-                <img src="images/profile.jpg" alt="Davis McCracken" class="profile-photo">
-                <!-- Name and Title -->
-                <h1>Davis McCracken</h1>
-                <h3>Business Development Lead at Always Pristine Cleaning</h3>
-            </div>
-            <!-- Navigation -->
-            <nav id="nav">
-                <ul>
-                    <li><a href="#about">About Me</a></li>
-                    <li><a href="#experience">Experience</a></li>
-                    <li><a href="#education">Education</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+  <header id="home">
+    <div class="container">
+      <nav class="nav-bar">
+        <a href="#home" class="logo">[Your Name]</a>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="hero">
+        <h1>Hello, I'm <span>[Your Name]</span></h1>
+        <p>A [Your Role/Profession] based in [Location]</p>
+        <a href="#projects" class="btn">View My Work</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="container about-section">
+      <div class="about-text">
+        <h2>About Me</h2>
+        <p>Write a brief introduction about yourself, your background, and what you love doing. You might mention your education, work experience, or what makes you passionate about your field.</p>
+      </div>
+      <div class="about-image">
+        <img src="img/your-photo.jpg" alt="Your Name">
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="alt-bg">
+    <div class="container">
+      <h2>Skills &amp; Tools</h2>
+      <ul class="skills-list">
+        <li>HTML5 &amp; CSS3</li>
+        <li>JavaScript/TypeScript</li>
+        <li>React / Vue / Angular</li>
+        <li>Node.js / Express</li>
+        <li>Python / Flask / Django</li>
+        <li>Git &amp; GitHub</li>
+        <li>UI/UX Design</li>
+        <!-- Add or remove skills as needed -->
+      </ul>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <!-- Repeat this block for each project -->
+        <div class="project-card">
+          <img src="img/project1-thumbnail.jpg" alt="Project 1">
+          <h3>Project Title</h3>
+          <p>Short description of what you did and what technologies you used.</p>
+          <a href="https://example.com" target="_blank" class="btn-small">View Project</a>
         </div>
-    </section>
 
-    <!-- About Me -->
-    <section id="about" class="container">
-        <header class="major">
-            <h2>About Me</h2>
-        </header>
-        <p>
-            I am a dedicated business development professional with a passion for optimizing processes and driving growth. With a strong background in data analytics and project management, I excel at turning complex data into actionable strategies.
-        </p>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="container">
-        <header class="major">
-            <h2>Work Experience</h2>
-        </header>
-        <div class="timeline">
-            <!-- Timeline Item -->
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h3>Business Development Lead</h3>
-                    <span class="date">July 2023 - Present</span>
-                    <p><strong>Always Pristine Cleaning</strong></p>
-                    <ul>
-                        <li>Leading business development initiatives to scale the company.</li>
-                        <li>Implemented new client acquisition strategies.</li>
-                        <li>Optimized operational workflows for efficiency.</li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Add more timeline items as needed -->
+        <div class="project-card">
+          <img src="img/project2-thumbnail.jpg" alt="Project 2">
+          <h3>Project Title</h3>
+          <p>Short description of what you did and what technologies you used.</p>
+          <a href="https://example.com" target="_blank" class="btn-small">View Project</a>
         </div>
-    </section>
+        <!-- Add more project cards as needed -->
+      </div>
+    </div>
+  </section>
 
-    <!-- Education Section -->
-    <section id="education" class="container">
-        <header class="major">
-            <h2>Education</h2>
-        </header>
-        <div class="timeline">
-            <!-- Timeline Item -->
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h3>Bachelor of Interdisciplinary Studies, Business Concentration</h3>
-                    <span class="date">Expected Graduation: May 2025</span>
-                    <p><strong>Western Kentucky University</strong></p>
-                    <p>Certificate in Applied Data Analytics</p>
-                    <p>Relevant Coursework: Business Analytics, Data Visualization, Project Planning.</p>
-                </div>
-            </div>
-            <!-- Add more timeline items as needed -->
-        </div>
-    </section>
+  <section id="contact" class="alt-bg">
+    <div class="container">
+      <h2>Contact</h2>
+      <p>Interested in working together or just want to say hello? Reach out at:</p>
+      <p><a href="mailto:your-email@example.com">your-email@example.com</a></p>
+      <div class="social-links">
+        <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+        <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+        <a href="https://twitter.com/yourhandle" target="_blank">Twitter</a>
+      </div>
+    </div>
+  </section>
 
-    <!-- Skills -->
-    <section id="skills" class="container">
-        <header class="major">
-            <h2>Skills</h2>
-        </header>
-        <div class="skills-grid">
-            <div class="skill-item">
-                <i class="fab fa-python"></i>
-                <span>Python</span>
-            </div>
-            <div class="skill-item">
-                <i class="fab fa-js-square"></i>
-                <span>JavaScript</span>
-            </div>
-            <div class="skill-item">
-                <i class="fab fa-html5"></i>
-                <span>HTML5</span>
-            </div>
-            <div class="skill-item">
-                <i class="fab fa-css3-alt"></i>
-                <span>CSS3</span>
-            </div>
-            <div class="skill-item">
-                <i class="fas fa-chart-line"></i>
-                <span>Data Analysis</span>
-            </div>
-            <div class="skill-item">
-                <i class="fas fa-project-diagram"></i>
-                <span>Project Management</span>
-            </div>
-            <!-- Add more skills as needed -->
-        </div>
-    </section>
-
-    <!-- Contact Form -->
-    <section id="contact" class="container">
-        <header class="major">
-            <h2>Contact Me</h2>
-        </header>
-        <form action="https://formspree.io/f/yourformid" method="POST">
-            <div class="form-group">
-                <input type="text" name="name" placeholder="Your Name" required>
-            </div>
-            <div class="form-group">
-                <input type="email" name="_replyto" placeholder="Your Email" required>
-            </div>
-            <div class="form-group">
-                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-            </div>
-            <button type="submit" class="button">Send Message</button>
-        </form>
-    </section>
-
-    <!-- Footer -->
-    <footer id="footer" class="container">
-        <p>&copy; 2024 Davis McCracken. All rights reserved.</p>
-    </footer>
+  <footer>
+    <div class="container">
+      <p>© [Your Name]. Built with love and hosted on GitHub Pages.</p>
+    </div>
+  </footer>
 </body>
 </html>
