@@ -1,0 +1,241 @@
+/* ==========================================================================
+   Davis McCracken — Colors & Type Foundations
+   Catppuccin-inspired soft dark, neutral-led with quiet accents.
+   ========================================================================== */
+
+/* --- Webfonts ------------------------------------------------------------- */
+/* SUBSTITUTION FLAG: no fonts shipped by the brand owner; sourcing from
+   Google Fonts as the closest-match defaults. Replace if/when files arrive. */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+:root {
+  /* ============================================================
+     COLOR — base palette
+     A soft, low-saturation dark theme. Backgrounds skew blue-black;
+     surfaces step up in cool slate. Text leans warm-neutral so it
+     feels easy on the eyes against the cool ground.
+     ============================================================ */
+
+  /* Backgrounds (deepest → highest surface) */
+  --bg-base:        #14181f;  /* page; one notch deeper than logo bg */
+  --bg-surface:     #181d27;  /* canonical logo background — primary surface */
+  --bg-elevated:    #1f2531;  /* cards, panels */
+  --bg-overlay:     #262d3b;  /* menus, popovers, hover-raised */
+  --bg-inset:       #11141a;  /* code blocks, wells */
+
+  /* Borders / hairlines */
+  --border-subtle:  #232a37;  /* default card border */
+  --border-default: #2e3645;  /* inputs, dividers */
+  --border-strong:  #3b4357;  /* logo glyph color — focus/active rims */
+
+  /* Foreground (text) — warm neutrals on cool ground */
+  --fg-primary:     #e6e3dc;  /* body, headlines */
+  --fg-secondary:   #b8b3a8;  /* secondary copy */
+  --fg-tertiary:    #807a6d;  /* meta, captions */
+  --fg-muted:       #5a564d;  /* placeholder, disabled */
+  --fg-on-accent:   #14181f;  /* text on bright accent fills */
+
+  /* Brand */
+  --brand-slate:    #3b4357;  /* logo glyph */
+  --brand-slate-2:  #4a5470;  /* one step lighter for hover/lift */
+
+  /* Accents — catppuccin-inspired, used SPARINGLY (1 per surface) */
+  --accent-mauve:   #c4a7e7;  /* primary accent — links, focus, highlights */
+  --accent-peach:   #f5c2a4;  /* warm callouts, "now playing" */
+  --accent-sage:    #a6c4a3;  /* success / positive */
+  --accent-rose:    #e8a5a5;  /* destructive / warning */
+  --accent-sky:     #a4c2e3;  /* info, code keywords */
+  --accent-sand:    #d8c8a3;  /* tags, secondary highlights */
+
+  /* Semantic */
+  --color-link:     var(--accent-mauve);
+  --color-success:  var(--accent-sage);
+  --color-warning:  var(--accent-sand);
+  --color-danger:   var(--accent-rose);
+  --color-info:     var(--accent-sky);
+
+  /* Selection */
+  --selection-bg:   #3a3450;
+  --selection-fg:   var(--fg-primary);
+
+  /* ============================================================
+     TYPE — families
+     Sans for UI/body, serif for editorial display, mono for code.
+     ============================================================ */
+  --font-sans:    "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif:   "Instrument Serif", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-display: var(--font-serif); /* editorial moments */
+
+  /* Type scale — modular ~1.2 with display jump */
+  --fs-xs:    12px;
+  --fs-sm:    13px;
+  --fs-base:  15px;   /* body */
+  --fs-md:    17px;
+  --fs-lg:    20px;
+  --fs-xl:    24px;
+  --fs-2xl:   32px;
+  --fs-3xl:   44px;
+  --fs-4xl:   60px;
+  --fs-5xl:   84px;   /* hero */
+
+  /* Line heights */
+  --lh-tight:   1.1;
+  --lh-snug:    1.25;
+  --lh-normal:  1.5;
+  --lh-relaxed: 1.65;
+
+  /* Weights */
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semibold:600;
+  --fw-bold:    700;
+
+  /* Tracking */
+  --tracking-tight:  -0.02em;
+  --tracking-snug:   -0.01em;
+  --tracking-normal:  0;
+  --tracking-wide:    0.04em;
+  --tracking-caps:    0.12em;
+
+  /* ============================================================
+     SPACING — 4px base
+     ============================================================ */
+  --space-0:  0;
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  24px;
+  --space-6:  32px;
+  --space-7:  48px;
+  --space-8:  64px;
+  --space-9:  96px;
+  --space-10: 128px;
+
+  /* ============================================================
+     RADII
+     ============================================================ */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-2xl:  24px;
+  --radius-full: 9999px;
+
+  /* ============================================================
+     SHADOWS — soft, low-spread; we lean on borders + elevation
+     ============================================================ */
+  --shadow-xs: 0 1px 0 rgba(0,0,0,0.20);
+  --shadow-sm: 0 2px 6px rgba(0,0,0,0.25);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.35);
+  --shadow-lg: 0 24px 60px rgba(0,0,0,0.45);
+  --shadow-inset: inset 0 1px 0 rgba(255,255,255,0.04);
+  --glow-focus: 0 0 0 3px rgba(196,167,231,0.25);
+
+  /* ============================================================
+     MOTION
+     ============================================================ */
+  --ease-out:   cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in:    cubic-bezier(0.4, 0, 1, 1);
+  --ease-soft:  cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-quick:  120ms;
+  --dur-base:   200ms;
+  --dur-slow:   320ms;
+}
+
+/* ==========================================================================
+   SEMANTIC TYPE — drop-in element styles
+   ========================================================================== */
+
+.dm-h1, h1.dm {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-4xl);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-primary);
+}
+
+.dm-h2, h2.dm {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-3xl);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-primary);
+}
+
+.dm-h3, h3.dm {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--fs-xl);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-snug);
+  color: var(--fg-primary);
+}
+
+.dm-h4, h4.dm {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--fs-md);
+  line-height: var(--lh-snug);
+  color: var(--fg-primary);
+}
+
+.dm-p, p.dm {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--fs-base);
+  line-height: var(--lh-relaxed);
+  color: var(--fg-primary);
+  text-wrap: pretty;
+}
+
+.dm-lead {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--fs-lg);
+  line-height: var(--lh-relaxed);
+  color: var(--fg-secondary);
+}
+
+.dm-meta, .dm-caption {
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  color: var(--fg-tertiary);
+  letter-spacing: var(--tracking-normal);
+}
+
+.dm-eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--fg-tertiary);
+}
+
+.dm-code, code.dm {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  background: var(--bg-inset);
+  color: var(--accent-sky);
+  padding: 0.12em 0.4em;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+}
+
+.dm-link, a.dm {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-decoration-color: rgba(196,167,231,0.35);
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color var(--dur-base) var(--ease-out);
+}
+.dm-link:hover, a.dm:hover {
+  text-decoration-color: var(--color-link);
+}
+
+::selection { background: var(--selection-bg); color: var(--selection-fg); }
