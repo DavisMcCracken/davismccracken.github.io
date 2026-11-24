@@ -1,0 +1,50 @@
+---
+const reps = ['A', 'B', 'C', 'D'];
+---
+
+<svg
+  viewBox="0 0 480 236"
+  width="480"
+  height="236"
+  role="img"
+  aria-label="System overview: each rep logs calls in a workbook made from a shared template; Power Query combines every log in the shared folder into one table that feeds a filterable dashboard."
+  class="block h-auto w-full font-mono"
+>
+  <text x="24" y="26" fill="currentColor" font-size="18" class="text-fg-dim">Rep logs · from .xltx template</text>
+
+  <rect x="24" y="36" width="432" height="58" fill="currentColor" class="text-bg" />
+  <rect x="24" y="36" width="432" height="58" fill="none" stroke="currentColor" class="text-line-strong" />
+  {reps.map((rep, index) => {
+    const start = 24 + 108 * index;
+    const center = start + 54;
+    return (
+      <g>
+        {index > 0 && <path d={`M${start} 36v58`} stroke="currentColor" class="text-line-strong" />}
+        <text x={center} y="72" fill="currentColor" font-size="19" text-anchor="middle" class="text-fg">Rep {rep}</text>
+        <path d={`M${center} 94v22`} stroke="currentColor" stroke-width="1.5" class="text-green/65" />
+      </g>
+    );
+  })}
+  <path d="M78 116h324" stroke="currentColor" stroke-width="1.5" class="text-green/65" />
+
+  <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green">
+    <path d="M240 116v20m-5-5 5 5 5-5" />
+    <path d="M178 196h22m-5-5 5 5-5 5" />
+    <path d="M316 196h22m-5-5 5 5-5 5" />
+  </g>
+
+  <rect x="24" y="140" width="432" height="30" fill="currentColor" class="text-green/10" />
+  <rect x="24" y="140" width="432" height="30" fill="none" stroke="currentColor" class="text-green/60" />
+  <text x="240" y="161" fill="currentColor" font-size="18" text-anchor="middle" class="text-fg">Power Query · combine folder</text>
+
+  <g fill="none" stroke="currentColor" class="text-line-strong">
+    <rect x="24" y="178" width="154" height="40" />
+    <rect x="200" y="178" width="116" height="40" />
+    <rect x="338" y="178" width="118" height="40" />
+  </g>
+  <g fill="currentColor" font-size="18" text-anchor="middle" class="text-fg">
+    <text x="101" y="204">Clean + type</text>
+    <text x="258" y="204">One table</text>
+    <text x="397" y="204">Dashboard</text>
+  </g>
+</svg>

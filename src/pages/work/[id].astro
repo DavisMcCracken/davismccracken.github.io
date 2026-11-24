@@ -4,9 +4,9 @@ import type { InferGetStaticPropsType } from 'astro';
 import { getCollection, render } from 'astro:content';
 import Chip from '../../components/ui/Chip.astro';
 import KindPill from '../../components/ui/KindPill.astro';
+import CallLoggingFigure from '../../components/work/CallLoggingFigure.astro';
 import ChurnModelFigure from '../../components/work/ChurnModelFigure.astro';
 import DonationsPipelineFigure from '../../components/work/DonationsPipelineFigure.astro';
-import SalesRevampFigure from '../../components/work/SalesRevampFigure.astro';
 import Base from '../../layouts/Base.astro';
 
 export async function getStaticPaths() {
@@ -25,10 +25,10 @@ export async function getStaticPaths() {
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { entry, previous, next } = Astro.props;
-const { title, summary, kind, kindLabel, year, role, timeframe, stack, impact, impactVerified, figure } = entry.data;
+const { title, summary, kind, kindLabel, year, role, timeframe, stack, impact, impactVerified, figure, figureCaption } = entry.data;
 const [leadImpact, ...supportingImpact] = impact;
 const figures = new Map([
-  ['sales-revamp', SalesRevampFigure],
+  ['call-logging', CallLoggingFigure],
   ['donations-pipeline', DonationsPipelineFigure],
   ['churn-model', ChurnModelFigure],
 ]);
@@ -124,12 +124,12 @@ const { Content } = await render(entry);
         <figure class="mt-8 border border-line bg-surface">
           <Figure />
           <figcaption class="border-t border-line px-4 py-2 font-mono text-xs text-fg-dim">
-            Illustrative · synthetic data
+            {figureCaption}
           </figcaption>
         </figure>
       )}
 
-      <div class="mt-8 max-w-prose leading-7 text-fg-dim [&_h2]:mb-2 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-fg [&_h2:not(:first-child)]:mt-7 [&_p]:text-pretty [&_p+p]:mt-3">
+      <div class="case-body mt-8 leading-7 text-fg-dim">
         <Content />
       </div>
 
@@ -173,3 +173,73 @@ const { Content } = await render(entry);
     </article>
   </div>
 </Base>
+
+<style>
+  /* Rendered Markdown: prose stays at reading width; screenshots and code may use the full column. */
+  .case-body :global(:is(p, ul, ol, h2, h3, small)) {
+    max-width: 65ch;
+  }
+  .case-body :global(h2) {
+    margin-bottom: 0.5rem;
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--color-fg);
+  }
+  .case-body :global(h2:not(:first-child)) {
+    margin-top: 2.5rem;
+  }
+  .case-body :global(h3) {
+    margin-top: 2rem;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+    color: var(--color-fg);
+  }
+  .case-body :global(p) {
+    text-wrap: pretty;
+  }
+  .case-body :global(:is(p, ul, ol, pre, img) + :is(p, ul, ol, pre, img)) {
+    margin-top: 1rem;
+  }
+  .case-body :global(ul) {
+    list-style: disc;
+    padding-left: 1.25rem;
+  }
+  .case-body :global(li + li) {
+    margin-top: 0.375rem;
+  }
+  .case-body :global(li::marker) {
+    color: var(--color-comment);
+  }
+  .case-body :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-block: 1.25rem;
+    border: 1px solid var(--color-line);
+    border-radius: 0.25rem;
+  }
+  .case-body :global(pre) {
+    margin-block: 1rem;
+    overflow-x: auto;
+    border: 1px solid var(--color-line);
+    border-radius: 0.25rem;
+    padding: 0.875rem 1rem;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+  }
+  .case-body :global(:not(pre) > code) {
+    border-radius: 0.25rem;
+    background: var(--color-surface);
+    padding: 0.1em 0.35em;
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    color: var(--color-fg);
+  }
+  .case-body :global(small) {
+    display: block;
+    margin-top: 2rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-comment);
+  }
+</style>

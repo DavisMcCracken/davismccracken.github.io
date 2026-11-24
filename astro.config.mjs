@@ -8,6 +8,9 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://davismccracken.github.io',
   integrations: [react()],
+  markdown: {
+    shikiConfig: { theme: 'tokyo-night' },
+  },
 
   vite: {
     plugins: [tailwindcss()]

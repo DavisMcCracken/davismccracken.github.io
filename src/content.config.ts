@@ -14,6 +14,7 @@ const projects = defineCollection({
     role: z.string().optional(),
     timeframe: z.string().optional(),
     figure: z.string().optional(),
+    figureCaption: z.string().default('Illustrative · synthetic data'),
     stack: z.array(z.string()),
     impact: z.array(z.object({ label: z.string(), value: z.string() })).default([]),
     impactVerified: z.boolean().default(false),
