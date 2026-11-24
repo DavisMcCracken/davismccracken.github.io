@@ -1,6 +1,6 @@
 ---
 title: Sales form revamp
-summary: Rebuilt a slow, error-prone sales form into a guided Excel tool. Reps paste customer data, pick compatible models and add-ons, and get a finished proposal and sales order.
+summary: I rebuilt a manual sales form into a guided Excel tool that checks product compatibility and generates proposals and sales orders.
 kind: excel
 kindLabel: excel · power query · vba
 # TODO(davis): confirm year

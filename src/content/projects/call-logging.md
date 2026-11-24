@@ -1,6 +1,6 @@
 ---
 title: Call completion logging
-summary: One template, one folder, one dashboard. Standardized how a sales team logs follow-up calls and gave the department head live visibility into the whole team's outreach.
+summary: I built a shared Excel template and dashboard so sales reps could log follow-up calls consistently and their manager could track outreach in one place.
 kind: excel
 kindLabel: excel · power query · vba
 # TODO(davis): confirm year
