@@ -9,7 +9,7 @@ import WorkSheet from '../components/home/WorkSheet.astro';
 const resumeHref = existsSync('public/resume.pdf') ? '/resume.pdf' : undefined;
 ---
 
-<Base description="Davis McCracken, a Louisville database coordinator turning manual processes into automated Excel, Power Query and VBA tools.">
+<Base description="Davis McCracken’s portfolio of data automation, web development, and design.">
   <div class="flex flex-col gap-12 sm:gap-14">
     <Hero resumeHref={resumeHref} />
     <WorkSheet />

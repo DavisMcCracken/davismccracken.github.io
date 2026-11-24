@@ -1,6 +1,6 @@
 ---
 title: "Algorithms and the mind"
-summary: Capstone research on how engagement-driven algorithms shape what we see, how we feel about ourselves, and how we argue as a society, and what can push back.
+summary: My capstone examined how recommendation algorithms shape what people see, how they see themselves, and how they engage with others online. It also explored ways to reduce those harms.
 kind: writing
 kindLabel: research · capstone
 year: 2024
