@@ -1,0 +1,39 @@
+---
+import { Briefcase, Code, FileText, Mail } from 'lucide-react';
+import Section from './Section.astro';
+
+const links = [
+  { title: 'github', handle: 'DavisMcCracken', href: 'https://github.com/DavisMcCracken', icon: Code },
+  { title: 'linkedin', handle: 'davis-mccracken', href: 'https://www.linkedin.com/in/davis-mccracken/', icon: Briefcase },
+  { title: 'email', handle: 'davisnmccracken@gmail.com', href: 'mailto:davisnmccracken@gmail.com', icon: Mail },
+  { title: 'résumé', handle: 'PDF', href: '/resume.pdf', icon: FileText },
+];
+---
+
+<Section id="links" title="links" meta={`${links.length} · all the usual places`}>
+  <ul role="list" class="grid gap-3 sm:grid-cols-2">
+    {links.map(({ title, handle, href, icon: Icon }) => {
+      const external = href.startsWith('https://');
+      return (
+        <li class="min-w-0">
+          <a
+            href={href}
+            target={external ? '_blank' : undefined}
+            rel={external ? 'noreferrer' : undefined}
+            class="group flex h-full items-center gap-3 rounded-xl border border-line bg-surface px-3.5 py-3 motion-safe:transition-colors hover:border-line-strong hover:bg-raised focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
+            <span class="grid size-8 shrink-0 place-items-center rounded-lg bg-bg text-accent">
+              <Icon size={16} strokeWidth={1.5} aria-hidden="true" />
+            </span>
+            <span class="min-w-0 flex-1">
+              <span class="block text-sm font-medium">{title}</span>
+              <span class="block font-mono text-[0.6875rem] wrap-anywhere text-fg-dim">{handle}</span>
+              {external && <span class="sr-only"> (opens in a new tab)</span>}
+            </span>
+            <span aria-hidden="true" class="font-mono text-sm text-fg-dim/85 group-hover:text-accent">{external ? '↗' : '→'}</span>
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</Section>

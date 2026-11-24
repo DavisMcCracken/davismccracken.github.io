@@ -1,0 +1,48 @@
+---
+import Section from './Section.astro';
+
+const accessKey = import.meta.env.PUBLIC_WEB3FORMS_KEY?.trim();
+const email = 'davisnmccracken@gmail.com';
+const label = 'grid gap-1.5 font-mono text-xs text-fg-dim';
+const field = 'w-full rounded-lg border border-line-strong bg-bg px-3 py-2.5 font-sans text-sm text-fg placeholder:text-fg-dim/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent';
+---
+
+<Section id="contact" title="contact" meta="say hi">
+  <div class="rounded-xl border border-line bg-surface p-5 sm:p-7">
+    <h3 class="text-xl font-semibold tracking-tight sm:text-2xl">Got a problem worth <em class="text-accent not-italic">solving</em>?</h3>
+    <p class="mt-1 text-sm/6 text-fg-dim">Or just want to say hi. Either works.</p>
+
+    {accessKey && (
+      <form action="https://api.web3forms.com/submit" method="post" class="mt-5 grid gap-4">
+        <input type="hidden" name="access_key" value={accessKey} />
+        <input type="hidden" name="redirect" value="https://web3forms.com/success" />
+        <div class="grid gap-4 sm:grid-cols-2">
+          <label class={label}>
+            name
+            <input class={field} type="text" name="name" autocomplete="name" placeholder="Your name" required />
+          </label>
+          <label class={label}>
+            email
+            <input class={field} type="email" name="email" autocomplete="email" placeholder="you@somewhere.com" required />
+          </label>
+        </div>
+        <label class={label}>
+          <span>subject <span class="text-fg-dim/85">· optional</span></span>
+          <input class={field} type="text" name="subject" placeholder="Excel rescue mission, regression help, just saying hi…" />
+        </label>
+        <label class={label}>
+          message
+          <textarea class:list={[field, 'resize-y']} name="message" rows="4" placeholder="A few sentences is plenty" required></textarea>
+        </label>
+        <button type="submit" class="w-fit cursor-pointer rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-bg motion-safe:transition-colors hover:bg-accent/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+          Send message <span aria-hidden="true" class="ml-1">→</span>
+        </button>
+      </form>
+    )}
+
+    <p class="mt-4 text-sm/6 text-fg-dim">
+      {accessKey ? 'Or email me directly at' : 'Email me at'}
+      <a href={`mailto:${email}`} class="wrap-anywhere font-medium text-accent underline decoration-accent/50 underline-offset-4 hover:decoration-accent">{email}</a>.
+    </p>
+  </div>
+</Section>

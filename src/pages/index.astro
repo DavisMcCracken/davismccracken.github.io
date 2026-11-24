@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import About from '../components/home/About.astro';
+import AsciiRain from '../components/home/AsciiRain';
+import Contact from '../components/home/Contact.astro';
+import Hero from '../components/home/Hero.astro';
+import Links from '../components/home/Links.astro';
+import Now from '../components/home/Now.astro';
+import ProjectTimeline from '../components/home/ProjectTimeline.astro';
+import ScrollRail from '../components/home/ScrollRail';
+---
+
+<Base description="Davis McCracken, a Louisville database coordinator building data pipelines, automating reports, and exploring statistical models.">
+  <div class="relative isolate flex flex-col gap-16 pb-16 sm:gap-20 sm:pb-24">
+    <AsciiRain client:media="(prefers-reduced-motion: no-preference)" />
+    <ScrollRail client:media="(min-width: 80rem) and (prefers-reduced-motion: no-preference)" />
+    <Hero />
+    <ProjectTimeline />
+    <About />
+    <Now />
+    <Links />
+    <Contact />
+  </div>
+</Base>

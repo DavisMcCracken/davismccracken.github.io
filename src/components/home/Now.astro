@@ -1,0 +1,40 @@
+---
+import Section from './Section.astro';
+
+const card = 'rounded-xl border border-line bg-surface px-4 py-4 sm:px-5';
+const label = 'mb-2 font-mono text-[0.6875rem] tracking-widest text-accent uppercase';
+const note = 'mt-1.5 block font-mono text-xs text-fg-dim/85';
+---
+
+<Section id="now" title="currently" meta="updated · this week">
+  <dl class="grid gap-3 text-sm/6 sm:grid-cols-2">
+    <div class={card}>
+      <dt class={label}>working on</dt>
+      <dd>
+        Refining the churn model — adding channel features and a recency decay.
+        <span class={note}>v2 expected end of month</span>
+      </dd>
+    </div>
+    <div class={card}>
+      <dt class={label}>reading</dt>
+      <dd>
+        Tufte, again. <cite>Visual Display of Quantitative Information</cite>.
+        <span class={note}>slow re-read · year 2</span>
+      </dd>
+    </div>
+    <div class={card}>
+      <dt class={label}>learning</dt>
+      <dd>
+        Polars. Pandas works fine; Polars feels nicer.
+        <span class={note}>10% in · enjoying it</span>
+      </dd>
+    </div>
+    <div class={card}>
+      <dt class={label}>listening</dt>
+      <dd>
+        Long-form ambient and one country album on repeat.
+        <span class={note}>last updated · today</span>
+      </dd>
+    </div>
+  </dl>
+</Section>

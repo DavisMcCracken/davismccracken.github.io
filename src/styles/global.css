@@ -1,0 +1,66 @@
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/instrument-serif/400.css";
+@import "@fontsource/instrument-serif/400-italic.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+
+/* Tokyo Night (night variant). Tailwind utilities: bg-bg, text-fg, text-blue, border-line, ... */
+@theme {
+  --color-bg-deep: #16161e;
+  --color-bg: #1a1b26;
+  --color-surface: #1f2335;
+  --color-raised: #292e42;
+  --color-line: #292e42;
+  --color-line-strong: #3b4261;
+
+  --color-fg: #c0caf5;
+  --color-fg-dim: #a9b1d6;
+  --color-muted: #737aa2;
+  --color-comment: #565f89;
+
+  --color-blue: #7aa2f7;
+  --color-cyan: #7dcfff;
+  --color-magenta: #bb9af7;
+  --color-green: #9ece6a;
+  --color-yellow: #e0af68;
+  --color-orange: #ff9e64;
+  --color-red: #f7768e;
+  --color-teal: #73daca;
+
+  --color-accent: var(--color-magenta);
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+
+  a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+}

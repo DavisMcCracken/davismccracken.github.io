@@ -1,0 +1,53 @@
+---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const siteName = 'Davis McCracken';
+const {
+  title = siteName,
+  description = 'Davis McCracken — selected work in data, spreadsheets, and code.',
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
+const socialImage = new URL('/logo-mark.png', canonical);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical.href} />
+    <link rel="icon" type="image/png" href="/logo-mark.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:image" content={socialImage.href} />
+    <meta property="og:image:alt" content="Davis McCracken monogram" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage.href} />
+    <meta name="twitter:image:alt" content="Davis McCracken monogram" />
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <a
+      class="fixed top-3 left-3 z-60 -translate-y-20 rounded-md bg-bg px-3 py-2 focus:translate-y-0"
+      href="#main-content"
+    >Skip to content</a>
+    <Header />
+    <main id="main-content" tabindex="-1" class="relative mx-auto w-full max-w-[720px] flex-1 px-5 min-[721px]:px-8">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
