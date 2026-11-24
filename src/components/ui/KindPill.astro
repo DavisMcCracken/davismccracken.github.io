@@ -1,0 +1,19 @@
+---
+interface Props {
+  kind: 'excel' | 'code' | 'algo';
+  label: string;
+  class?: string;
+}
+
+const { kind, label, class: className } = Astro.props;
+
+const styles = {
+  excel: 'border-green/25 bg-green/10 text-green',
+  code: 'border-blue/25 bg-blue/10 text-blue',
+  algo: 'border-orange/25 bg-orange/10 text-orange',
+};
+---
+
+<span class:list={['inline-flex items-center whitespace-nowrap rounded-full border px-2 py-0.5 font-mono text-[0.6875rem]', styles[kind], className]}>
+  {label}
+</span>

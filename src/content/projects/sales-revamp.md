@@ -6,8 +6,12 @@ kind: excel
 kindLabel: excel · vba
 year: 2024
 order: 1
+# TODO(davis): role: "<your role>"
+# TODO(davis): timeframe: "<e.g. 2024, 3 months>"
+figure: sales-revamp
 stack: [Excel, Power Query, VBA, Pivot models]
 # TODO(davis): verify or remove — unverified figure
+impactVerified: false
 impact:
   - label: runtime
     value: manual half-day → 90s
@@ -29,7 +33,3 @@ I audited the full process and moved it into a single model. I replaced manual t
 ## Result
 
 The team could run reports from one source without rebuilding or reconciling them by hand each time.
-
-## Stack
-
-Excel, Power Query, VBA, and pivot models.

@@ -2,10 +2,9 @@
 @import "@fontsource/inter/400.css";
 @import "@fontsource/inter/500.css";
 @import "@fontsource/inter/600.css";
-@import "@fontsource/instrument-serif/400.css";
-@import "@fontsource/instrument-serif/400-italic.css";
 @import "@fontsource/jetbrains-mono/400.css";
 @import "@fontsource/jetbrains-mono/500.css";
+@import "@fontsource/instrument-serif/400.css";
 
 /* Tokyo Night (night variant). Tailwind utilities: bg-bg, text-fg, text-blue, border-line, ... */
 @theme {
@@ -19,7 +18,7 @@
   --color-fg: #c0caf5;
   --color-fg-dim: #a9b1d6;
   --color-muted: #737aa2;
-  --color-comment: #565f89;
+  --color-comment: color-mix(in srgb, #565f89, var(--color-fg) 52%);
 
   --color-blue: #7aa2f7;
   --color-cyan: #7dcfff;
@@ -41,12 +40,14 @@
   html {
     color-scheme: dark;
     scroll-padding-top: 5rem;
+    scrollbar-color: var(--color-line-strong) var(--color-bg);
   }
 
   body {
     background-color: var(--color-bg);
     color: var(--color-fg);
     font-family: var(--font-sans);
+    caret-color: var(--color-accent);
   }
 
   ::selection {
@@ -59,9 +60,17 @@
     outline-offset: 4px;
   }
 
-  a {
+  :where(p, li, .prose) a:not(.no-underline) {
     color: var(--color-accent);
     text-decoration: underline;
     text-underline-offset: 0.2em;
   }
+}
+
+@utility btn {
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-accent px-4 py-2 font-mono text-sm font-medium text-bg-deep no-underline hover:bg-accent/85 motion-safe:transition-colors;
+}
+
+@utility btn-ghost {
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-line px-4 py-2 font-mono text-sm font-medium text-fg no-underline hover:border-line-strong hover:bg-raised motion-safe:transition-colors;
 }

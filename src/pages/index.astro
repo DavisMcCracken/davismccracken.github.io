@@ -1,24 +1,23 @@
 ---
+import { existsSync } from 'node:fs';
 import Base from '../layouts/Base.astro';
 import About from '../components/home/About.astro';
-import AsciiRain from '../components/home/AsciiRain';
 import Contact from '../components/home/Contact.astro';
 import Hero from '../components/home/Hero.astro';
-import Links from '../components/home/Links.astro';
 import Now from '../components/home/Now.astro';
-import ProjectTimeline from '../components/home/ProjectTimeline.astro';
-import ScrollRail from '../components/home/ScrollRail';
+import WorkSheet from '../components/home/WorkSheet.astro';
+
+const resumeHref = existsSync('public/resume.pdf') ? '/resume.pdf' : undefined;
+const availability = 'Open to data analyst and other tech roles, plus freelance web development and design.';
 ---
 
 <Base description="Davis McCracken, a Louisville database coordinator building data pipelines, automating reports, and exploring statistical models.">
-  <div class="relative isolate flex flex-col gap-16 pb-16 sm:gap-20 sm:pb-24">
-    <AsciiRain client:media="(prefers-reduced-motion: no-preference)" />
-    <ScrollRail client:media="(min-width: 80rem) and (prefers-reduced-motion: no-preference)" />
-    <Hero />
-    <ProjectTimeline />
+  <div class="flex flex-col gap-12 sm:gap-14">
+    <!-- TODO(copy): Review the shared availability wording in Hero and Contact. -->
+    <Hero availability={availability} resumeHref={resumeHref} />
+    <WorkSheet />
     <About />
     <Now />
-    <Links />
-    <Contact />
+    <Contact availability={availability} resumeHref={resumeHref} />
   </div>
 </Base>

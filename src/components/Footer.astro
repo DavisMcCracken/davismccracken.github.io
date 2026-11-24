@@ -2,44 +2,8 @@
 const year = new Date().getUTCFullYear();
 ---
 
-<footer class="relative mx-auto mt-24 w-full max-w-[720px] px-5 pb-16 min-[721px]:px-8 min-[721px]:pb-24">
-  <div class="flex flex-wrap items-center justify-between gap-x-5 gap-y-3 border-t border-line pt-6 font-mono text-xs text-fg-dim">
-    <span class="flex items-center gap-2.5">
-      <span>© {year} · davis mccracken</span>
-      <span aria-hidden="true" class="cursor-mark h-3 w-1.5 bg-accent"></span>
-    </span>
-    <span data-session-uptime hidden>
-      <span>session uptime</span><span data-elapsed class="ml-2 tabular-nums text-fg">00:00:00</span>
-    </span>
+<footer class="mx-auto mt-12 w-full max-w-[720px] px-5 pb-6 min-[721px]:mt-16 min-[721px]:px-8 min-[721px]:pb-8">
+  <div class="border-t border-line pt-4 font-mono text-xs text-fg-dim">
+    © {year} · davis mccracken
   </div>
 </footer>
-
-<script>
-  const uptime = document.querySelector<HTMLElement>('[data-session-uptime]');
-  const elapsed = uptime?.querySelector<HTMLElement>('[data-elapsed]');
-
-  if (uptime && elapsed && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const tick = () => {
-      const seconds = Math.floor(performance.now() / 1000);
-      elapsed.textContent = [Math.floor(seconds / 3600), Math.floor(seconds / 60) % 60, seconds % 60]
-        .map((unit) => String(unit).padStart(2, '0'))
-        .join(':');
-    };
-
-    tick();
-    uptime.hidden = false;
-    window.setInterval(tick, 1000);
-  }
-</script>
-
-<style>
-  @media (prefers-reduced-motion: no-preference) {
-    .cursor-mark {
-      animation: footer-blink 1.05s steps(1) 4;
-    }
-  }
-
-  @keyframes footer-blink {
-    50% { opacity: 0; }
-  }
-</style>

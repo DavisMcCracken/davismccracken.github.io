@@ -5,9 +5,13 @@ kind: code
 kindLabel: python · sql
 year: 2024
 order: 2
+# TODO(davis): role: "<your role>"
+# TODO(davis): timeframe: "<e.g. 2024, 3 months>"
+figure: donations-pipeline
 stack: [Python, pandas, SQL, Airflow-style orchestration]
 # TODO(davis): Anonymise donor data before capturing or publishing any screenshots.
 # TODO(davis): verify or remove — unverified figure
+impactVerified: false
 impact:
   - label: intake sources
     value: unified 5 disparate feeds

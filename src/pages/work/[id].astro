@@ -1,11 +1,17 @@
 ---
+import { existsSync } from 'node:fs';
 import type { InferGetStaticPropsType } from 'astro';
 import { getCollection, render } from 'astro:content';
+import Chip from '../../components/ui/Chip.astro';
+import KindPill from '../../components/ui/KindPill.astro';
+import ChurnModelFigure from '../../components/work/ChurnModelFigure.astro';
+import DonationsPipelineFigure from '../../components/work/DonationsPipelineFigure.astro';
+import SalesRevampFigure from '../../components/work/SalesRevampFigure.astro';
 import Base from '../../layouts/Base.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects', ({ data }) => !data.draft);
-  projects.sort((a, b) => a.data.order - b.data.order || a.id.localeCompare(b.id));
+  projects.sort((a, b) => b.data.year - a.data.year || a.data.order - b.data.order || a.id.localeCompare(b.id));
 
   return projects.map((entry, index) => ({
     params: { id: entry.id },
@@ -19,63 +25,151 @@ export async function getStaticPaths() {
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { entry, previous, next } = Astro.props;
-const { title, summary, kindLabel, year, stack, impact } = entry.data;
+const { title, summary, kind, kindLabel, year, role, timeframe, stack, impact, impactVerified, figure } = entry.data;
+const [leadImpact, ...supportingImpact] = impact;
+const figures = new Map([
+  ['sales-revamp', SalesRevampFigure],
+  ['donations-pipeline', DonationsPipelineFigure],
+  ['churn-model', ChurnModelFigure],
+]);
+const Figure = figure ? figures.get(figure) : undefined;
+const hasResume = existsSync('public/resume.pdf');
 const { Content } = await render(entry);
 ---
 
 <Base title={title} description={summary}>
   <div class="py-12 min-[721px]:py-16">
-    <a href="/#work" class="inline-flex items-center gap-2 font-mono text-sm text-fg-dim hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
-      <span aria-hidden="true">←</span> Back to work
+    <a href="/#work" class="inline-flex min-h-11 items-center gap-2 font-mono text-sm text-fg-dim no-underline hover:text-accent">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="size-4" aria-hidden="true">
+        <path d="M13 8H3m4-4L3 8l4 4" />
+      </svg>
+      Back to work
     </a>
 
     <article class="mt-8">
-      <header class="border-b border-line pb-8">
-        <div class="flex flex-wrap items-center gap-3 font-mono text-xs">
-          <span class="rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-accent">{kindLabel}</span>
-          <time datetime={String(year)} class="text-fg-dim">{year}</time>
+      <header>
+        <h1 class="text-balance text-3xl leading-tight font-semibold tracking-tight text-fg sm:text-5xl">{title}</h1>
+        <div class="mt-3 flex flex-wrap items-center gap-3 font-mono text-xs text-fg-dim tabular-nums">
+          <KindPill kind={kind} label={kindLabel} />
+          <time datetime={String(year)}>{year}</time>
         </div>
-        <h1 class="mt-4 text-balance text-3xl leading-tight font-semibold tracking-tight text-fg sm:text-5xl">{title}</h1>
-        <p class="mt-3 max-w-prose text-lg leading-relaxed text-fg-dim">{summary}</p>
+        <p class="mt-4 max-w-prose text-lg leading-relaxed text-pretty text-fg-dim">{summary}</p>
 
-        <ul aria-label="Technologies" role="list" class="mt-5 flex flex-wrap gap-2 font-mono text-xs text-fg-dim">
+        {(role || timeframe) && (
+          <dl class="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+            {role && (
+              <div class="flex items-baseline gap-2">
+                <dt class="font-mono text-xs text-fg-dim">Role</dt>
+                <dd class="text-fg">{role}</dd>
+              </div>
+            )}
+            {timeframe && (
+              <div class="flex items-baseline gap-2">
+                <dt class="font-mono text-xs text-fg-dim">Timeframe</dt>
+                <dd class="text-fg">{timeframe}</dd>
+              </div>
+            )}
+          </dl>
+        )}
+
+        <ul aria-label="Technologies" role="list" class="mt-4 flex flex-wrap gap-1.5">
           {stack.map((tool) => (
-            <li class="rounded border border-line-strong px-2.5 py-1">{tool}</li>
+            <li><Chip>{tool}</Chip></li>
           ))}
         </ul>
 
-        {impact.length > 0 && (
-          <dl aria-label="Project impact" class="mt-7 grid gap-3 sm:grid-cols-3">
-            {impact.map(({ label, value }) => (
-              <div class="rounded-lg border border-line bg-surface p-4">
-                <dt class="font-mono text-xs text-accent">{label}</dt>
-                <dd class="mt-1 text-sm leading-relaxed text-fg">{value}</dd>
+        {leadImpact && (
+          <section aria-label="Project impact" class="mt-8 border-t border-line pt-6">
+            <dl>
+              <div class="flex flex-col gap-2">
+                <dt class="font-mono text-sm text-fg-dim">{leadImpact.label}</dt>
+                <dd class="-order-1 flex flex-wrap items-baseline gap-x-3 gap-y-2">
+                  <span class="min-w-0 font-mono text-[clamp(1.75rem,6vw,3rem)] leading-[1.1] tracking-tight text-balance text-fg tabular-nums">{leadImpact.value}</span>
+                  {!impactVerified && (
+                    <span class="inline-flex rounded-sm border border-yellow/25 bg-yellow/10 px-1.5 py-0.5 font-mono text-[0.6875rem] leading-none text-yellow">
+                      <span aria-hidden="true">unverified</span>
+                      <span class="sr-only">unverified figure</span>
+                    </span>
+                  )}
+                </dd>
               </div>
-            ))}
-          </dl>
+            </dl>
+
+            {supportingImpact.length > 0 && (
+              <dl class="mt-5 grid grid-cols-[repeat(auto-fit,minmax(min(100%,8rem),1fr))] border-t border-l border-line">
+                {supportingImpact.map(({ label, value }, index) => (
+                  <div class="min-w-0 border-r border-b border-line">
+                    <dt>
+                      <span aria-hidden="true" class="block border-b border-line bg-surface px-3 py-1 font-mono text-xs text-comment">{String.fromCharCode(65 + index)}</span>
+                      <span class="block px-3 pt-2 text-sm text-fg-dim">{label}</span>
+                    </dt>
+                    <dd class="mt-1 flex flex-wrap items-baseline gap-x-2 gap-y-1.5 px-3 pb-3 font-mono text-xs/5 text-fg tabular-nums">
+                      <span class="min-w-0 text-pretty">{value}</span>
+                      {!impactVerified && (
+                        <span class="inline-flex rounded-sm border border-yellow/25 bg-yellow/10 px-1.5 py-0.5 font-mono text-[0.6875rem] leading-none text-yellow">
+                          <span aria-hidden="true">unverified</span>
+                          <span class="sr-only">unverified figure</span>
+                        </span>
+                      )}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            )}
+          </section>
         )}
       </header>
 
-      <div class="mt-8 max-w-prose leading-7 text-fg-dim [&_h2]:mb-2 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-fg [&_h2:not(:first-child)]:mt-7 [&_p+p]:mt-3">
+      {Figure && (
+        <figure class="mt-8 border border-line bg-surface">
+          <Figure />
+          <figcaption class="border-t border-line px-4 py-2 font-mono text-xs text-fg-dim">
+            Illustrative · synthetic data
+          </figcaption>
+        </figure>
+      )}
+
+      <div class="mt-8 max-w-prose leading-7 text-fg-dim [&_h2]:mb-2 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-fg [&_h2:not(:first-child)]:mt-7 [&_p]:text-pretty [&_p+p]:mt-3">
         <Content />
       </div>
-    </article>
 
-    {(previous || next) && (
-      <nav aria-label="Case studies" class="mt-10 grid gap-3 border-t border-line pt-6 sm:grid-cols-2">
-        {previous && (
-          <a href={`/work/${previous.id}/`} rel="prev" class="rounded-lg border border-line px-4 py-3 text-fg hover:border-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
-            <span class="block font-mono text-xs text-fg-dim"><span aria-hidden="true">←</span> Previous project</span>
-            <span class="mt-1 block text-sm">{previous.data.title}</span>
-          </a>
+      <footer class="mt-10 space-y-6 border-t border-line pt-6">
+        {(previous || next) && (
+          <nav aria-label="Case studies" class:list={['grid gap-px border border-line bg-line', previous && next && 'sm:grid-cols-2']}>
+            {previous && (
+              <a href={`/work/${previous.id}/`} rel="prev" class="group block bg-bg px-4 py-3 text-fg no-underline hover:bg-surface focus-visible:bg-surface">
+                <span class="inline-flex items-center gap-1.5 font-mono text-xs text-fg-dim">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="size-3.5" aria-hidden="true">
+                    <path d="M13 8H3m4-4L3 8l4 4" />
+                  </svg>
+                  Previous project
+                </span>
+                <span class="mt-1 block text-sm text-balance group-hover:text-accent group-focus-visible:text-accent">{previous.data.title}</span>
+              </a>
+            )}
+            {next && (
+              <a href={`/work/${next.id}/`} rel="next" class="group block bg-bg px-4 py-3 text-fg no-underline hover:bg-surface focus-visible:bg-surface">
+                <span class="inline-flex items-center gap-1.5 font-mono text-xs text-fg-dim">
+                  Next project
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="size-3.5" aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4" />
+                  </svg>
+                </span>
+                <span class="mt-1 block text-sm text-balance group-hover:text-accent group-focus-visible:text-accent">{next.data.title}</span>
+              </a>
+            )}
+          </nav>
         )}
-        {next && (
-          <a href={`/work/${next.id}/`} rel="next" class="rounded-lg border border-line px-4 py-3 text-fg hover:border-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:col-start-2">
-            <span class="block font-mono text-xs text-fg-dim">Next project <span aria-hidden="true">→</span></span>
-            <span class="mt-1 block text-sm">{next.data.title}</span>
-          </a>
-        )}
-      </nav>
-    )}
+
+        {/* TODO(copy): Review the closing CTA wording. */}
+        <section aria-labelledby="case-contact" class="border border-line bg-surface p-5 sm:flex sm:items-center sm:justify-between sm:gap-4">
+          <h2 id="case-contact" class="text-xl font-semibold tracking-tight text-balance text-fg">Like this kind of work?</h2>
+          <div class="mt-4 flex flex-wrap gap-2 sm:mt-0">
+            <a href="/#contact" class="btn">Get in touch</a>
+            {hasResume && <a href="/resume.pdf" class="btn-ghost">Résumé</a>}
+          </div>
+        </section>
+      </footer>
+    </article>
   </div>
 </Base>

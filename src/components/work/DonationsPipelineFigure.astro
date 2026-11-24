@@ -1,0 +1,50 @@
+---
+const columns = ['A', 'B', 'C', 'D', 'E'];
+---
+
+<svg
+  viewBox="0 0 480 216"
+  width="480"
+  height="216"
+  role="img"
+  aria-label="Illustrative donations pipeline: five intake feeds converge for cleaning and deduplication, then flow through loading to reports."
+  class="block h-auto w-full font-mono"
+>
+  <text x="24" y="26" fill="currentColor" font-size="18" class="text-fg-dim">Intake sources</text>
+
+  <rect x="24" y="34" width="430" height="62" fill="currentColor" class="text-bg" />
+  <rect x="24" y="34" width="430" height="62" fill="none" stroke="currentColor" class="text-line-strong" />
+  <path d="M24 58h430" stroke="currentColor" class="text-line-strong" />
+  {columns.map((column, index) => {
+    const start = 24 + 86 * index;
+    const center = start + 43;
+
+    return (
+      <g>
+        {index > 0 && <path d={`M${start} 34v62`} stroke="currentColor" class="text-line-strong" />}
+        <text x={center} y="52" fill="currentColor" font-size="16" text-anchor="middle" class="text-fg-dim">{column}</text>
+        <text x={center} y="83" fill="currentColor" font-size="19" text-anchor="middle" class="text-fg">Feed {index + 1}</text>
+        <path d={`M${center} 96v25`} stroke="currentColor" stroke-width="1.5" class="text-blue/65" />
+      </g>
+    );
+  })}
+  <path d="M67 121h344" stroke="currentColor" stroke-width="1.5" class="text-blue/65" />
+
+  <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue">
+    <path d="M114 121v22m-5-5 5 5 5-5" />
+    <path d="M204 169h29m-5-5 5 5-5 5" />
+    <path d="M314 169h29m-5-5 5 5-5 5" />
+  </g>
+
+  <rect x="24" y="146" width="180" height="46" fill="currentColor" class="text-blue/10" />
+  <rect x="24" y="146" width="180" height="46" fill="none" stroke="currentColor" class="text-blue/60" />
+  <g fill="none" stroke="currentColor" class="text-line-strong">
+    <rect x="236" y="146" width="78" height="46" />
+    <rect x="346" y="146" width="108" height="46" />
+  </g>
+  <g fill="currentColor" font-size="19" text-anchor="middle" class="text-fg">
+    <text x="114" y="176">Clean / dedupe</text>
+    <text x="275" y="176">Load</text>
+    <text x="400" y="176">Reports</text>
+  </g>
+</svg>

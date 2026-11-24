@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page not found">
+  <!-- TODO(copy): Review error wording and recovery labels. -->
+  <section class="pt-12 sm:pt-16">
+    <h1 class="text-4xl font-semibold tracking-tight text-fg">Page not found</h1>
+    <div class="mt-5 grid grid-cols-[auto_minmax(0,1fr)] border border-line">
+      <span aria-hidden="true" class="border-r border-line bg-surface px-3 py-3 font-mono text-sm text-red">#REF!</span>
+      <p class="px-3 py-3 text-sm/6 text-fg-dim">This page may have moved. Try one of these links.</p>
+    </div>
+    <div class="mt-6 flex flex-wrap gap-2">
+      <a href="/" class="btn">Go home</a>
+      <a href="/#work" class="btn-ghost">View work</a>
+      <a href="/#contact" class="btn-ghost">Contact</a>
+    </div>
+  </section>
+</Base>

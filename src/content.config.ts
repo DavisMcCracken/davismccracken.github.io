@@ -11,8 +11,12 @@ const projects = defineCollection({
     kindLabel: z.string(),
     year: z.number().int(),
     order: z.number().int().default(0),
+    role: z.string().optional(),
+    timeframe: z.string().optional(),
+    figure: z.string().optional(),
     stack: z.array(z.string()),
     impact: z.array(z.object({ label: z.string(), value: z.string() })).default([]),
+    impactVerified: z.boolean().default(false),
     draft: z.boolean().default(false),
   }),
 });

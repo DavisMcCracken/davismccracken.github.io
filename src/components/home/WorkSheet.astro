@@ -1,0 +1,91 @@
+---
+import { getCollection } from 'astro:content';
+import { ArrowRight } from 'lucide-react';
+import Chip from '../ui/Chip.astro';
+import KindPill from '../ui/KindPill.astro';
+import Section from './Section.astro';
+
+const projects = await getCollection('projects', (project) => !project.data.draft);
+projects.sort((a, b) => b.data.year - a.data.year || a.data.order - b.data.order || a.id.localeCompare(b.id));
+
+const headers = [['A', 'Year'], ['B', 'Project'], ['C', 'Type'], ['D', 'Impact']];
+const columns = 'sm:grid-cols-[2rem_4rem_minmax(0,1fr)_10rem_8rem]';
+const cell = 'min-w-0 border-line px-3 sm:px-2';
+const cellLabel = 'shrink-0 font-mono text-xs text-fg-dim sm:sr-only';
+---
+
+<Section id="work" title="work" meta={`${projects.length} ${projects.length === 1 ? 'project' : 'projects'}`}>
+  <p class="mb-4 text-base/7 text-fg-dim">Things I've built at work and on weekends.</p>
+  {projects.length ? (
+    <div class="border border-line">
+      <div class:list={['hidden border-b border-line bg-surface font-mono text-xs sm:grid', columns]} aria-hidden="true">
+        <span class="self-end pb-1.5 text-center text-comment tabular-nums">1</span>
+        {headers.map(([letter, label]) => (
+          <div class="border-l border-line">
+            <span class="block border-b border-line py-1 text-center text-comment">{letter}</span>
+            <span class="block px-2 py-1.5 font-medium text-fg-dim">{label}</span>
+          </div>
+        ))}
+      </div>
+      <ol role="list" class="divide-y divide-line">
+        {projects.map(({ id, data }, index) => {
+          const [impact] = data.impact;
+          return (
+            <li>
+              <a
+                href={`/work/${id}/`}
+                aria-labelledby={`work-${id}-title`}
+                aria-describedby={`work-${id}-summary`}
+                class:list={[
+                  'group relative grid grid-cols-[2rem_minmax(0,1fr)] text-fg no-underline hover:bg-surface focus-visible:z-10 focus-visible:outline-offset-0 motion-safe:transition-colors',
+                  columns,
+                ]}
+              >
+                <span aria-hidden="true" class="row-span-4 border-r border-line bg-surface pt-2.5 text-center font-mono text-xs text-comment tabular-nums sm:row-span-1 sm:pt-3.5">{index + 2}</span>
+                <div class:list={[cell, 'flex items-baseline gap-2 border-b py-2 font-mono text-xs tabular-nums sm:border-r sm:border-b-0 sm:py-3.5']}>
+                  <span class={cellLabel}>Year:</span>
+                  <time datetime={String(data.year)}>{data.year}</time>
+                </div>
+                <div class:list={[cell, 'border-b py-3 sm:border-r sm:border-b-0']}>
+                  <div class="flex items-baseline justify-between gap-2">
+                    <h3 id={`work-${id}-title`} class="wrap-anywhere text-base/6 font-semibold text-fg group-hover:text-accent group-focus-visible:text-accent">{data.title}</h3>
+                    <ArrowRight size={14} aria-hidden="true" className="shrink-0 self-center text-fg-dim group-hover:text-accent group-focus-visible:text-accent" />
+                  </div>
+                  <p id={`work-${id}-summary`} class="mt-1 wrap-anywhere text-sm/6 text-pretty text-fg-dim">{data.summary}</p>
+                  {data.stack.length > 0 && (
+                    <ul role="list" aria-label="Stack" class="mt-2 hidden flex-wrap gap-1 sm:flex">
+                      {data.stack.map((tag) => <li class="min-w-0"><Chip class="wrap-anywhere">{tag}</Chip></li>)}
+                    </ul>
+                  )}
+                </div>
+                <div class:list={[cell, 'flex flex-wrap items-baseline gap-2 border-b py-2 sm:block sm:border-r sm:border-b-0 sm:py-3']}>
+                  <span class={cellLabel}>Type:</span>
+                  <KindPill kind={data.kind} label={data.kindLabel} />
+                </div>
+                <div class:list={[cell, 'flex items-baseline gap-2 py-2 sm:block sm:py-3']}>
+                  <span class={cellLabel}>Impact:</span>
+                  {impact ? (
+                    <div class="min-w-0 wrap-anywhere">
+                      <p class="text-xs/5 text-fg-dim">{impact.label}</p>
+                      <p class="text-sm/5 font-medium tabular-nums text-fg">{impact.value}</p>
+                      {!data.impactVerified && (
+                        <span class="mt-1 inline-flex rounded-sm border border-yellow/25 bg-yellow/10 px-1.5 py-0.5 font-mono text-[0.6875rem] leading-none text-yellow">
+                          <span aria-hidden="true">unverified</span>
+                          <span class="sr-only">unverified figure</span>
+                        </span>
+                      )}
+                    </div>
+                  ) : (
+                    <span class="text-sm text-fg-dim">
+                      <span aria-hidden="true">—</span><span class="sr-only">No impact figure</span>
+                    </span>
+                  )}
+                </div>
+              </a>
+            </li>
+          );
+        })}
+      </ol>
+    </div>
+  ) : <p class="border border-line px-3 py-4 text-sm text-fg-dim">No projects to show.</p>}
+</Section>
