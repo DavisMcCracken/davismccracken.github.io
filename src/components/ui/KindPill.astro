@@ -5,7 +5,8 @@ interface Props {
   class?: string;
 }
 
-const { kind, label, class: className } = Astro.props;
+// Forward Astro's transition scope to the pill itself.
+const { kind, label, class: className, ...attrs } = Astro.props;
 
 const styles = {
   excel: 'border-green/25 bg-green/10 text-green',
@@ -14,6 +15,6 @@ const styles = {
 };
 ---
 
-<span class:list={['inline-flex items-center whitespace-nowrap rounded-full border px-2 py-0.5 font-mono text-[0.6875rem]', styles[kind], className]}>
+<span {...attrs} class:list={['inline-flex items-center whitespace-nowrap rounded-full border px-2 py-0.5 font-mono text-xs', styles[kind], className]}>
   {label}
 </span>

@@ -1,10 +1,9 @@
 ---
 interface Props {
-  availability: string;
   resumeHref?: string;
 }
 
-const { availability, resumeHref } = Astro.props;
+const { resumeHref } = Astro.props;
 ---
 
 <section id="top" aria-labelledby="hero-heading" class="pt-9 sm:pt-14">
@@ -13,7 +12,7 @@ const { availability, resumeHref } = Astro.props;
     Davis McCracken
   </h1>
   <p class="mt-3 text-base/6 font-medium sm:text-lg/7">Database Coordinator, Ronald McDonald House Louisville</p>
-  <p class="mt-1 max-w-[65ch] text-base/6 text-pretty text-fg-dim">{availability}</p>
+  <p class="mt-1 max-w-[65ch] text-base/6 text-pretty text-fg-dim">Open to data analyst and other tech roles, plus freelance web development and design.</p>
 
   <p class="mt-6 max-w-[65ch] text-base/7 text-pretty text-fg-dim">
     I work where the donor database meets the spreadsheet meets the script — building pipelines,

@@ -12,7 +12,7 @@ stack: [Excel, Power Query, VBA, Dynamic arrays]
 impactVerified: true
 impact:
   - label: faster proposal creation
-    value: "≥ 50%"
+    value: "≥50%"
 draft: false
 ---
 

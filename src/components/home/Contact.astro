@@ -2,11 +2,10 @@
 import Section from './Section.astro';
 
 interface Props {
-  availability: string;
   resumeHref?: string;
 }
 
-const { availability, resumeHref } = Astro.props;
+const { resumeHref } = Astro.props;
 const accessKey = import.meta.env.PUBLIC_WEB3FORMS_KEY?.trim();
 const email = 'davisnmccracken@gmail.com';
 const label = 'grid gap-1.5 font-mono text-xs text-fg-dim';
@@ -18,7 +17,6 @@ const profileLink = 'inline-flex min-h-11 items-center font-mono text-sm text-fg
   <div class="rounded-xl border border-line bg-surface p-5 sm:p-7">
     <h3 class="text-xl font-semibold tracking-tight text-balance sm:text-2xl">Got a problem worth <span class="text-accent">solving</span>?</h3>
     <p class="mt-1 text-sm/6 text-fg-dim">Or just want to say hi. Either works.</p>
-    <p class="mt-2 text-sm/6 text-fg">{availability}</p>
 
     <p id="contact-email" class="mt-5 font-mono text-sm wrap-anywhere text-fg-dim">{email}</p>
     <div class="mt-2 flex flex-wrap items-center gap-2">
@@ -60,11 +58,12 @@ const profileLink = 'inline-flex min-h-11 items-center font-mono text-sm text-fg
   </div>
 </Section>
 
-<script is:inline>
-  if (navigator.clipboard?.writeText) {
+<script>
+  document.addEventListener('astro:page-load', () => {
     const button = document.getElementById('copy-email');
-    const address = document.getElementById('contact-email').textContent.trim();
+    const address = document.getElementById('contact-email')?.textContent?.trim();
     const status = document.getElementById('copy-email-status');
+    if (!button || !address || !status || !navigator.clipboard?.writeText) return;
 
     button.addEventListener('click', async () => {
       status.textContent = '';
@@ -76,5 +75,5 @@ const profileLink = 'inline-flex min-h-11 items-center font-mono text-sm text-fg
       }
     });
     button.hidden = false;
-  }
+  });
 </script>

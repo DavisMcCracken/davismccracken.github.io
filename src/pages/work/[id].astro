@@ -35,18 +35,23 @@ const { Content } = await render(entry);
 
 <Base title={title} description={summary}>
   <div class="py-12 min-[721px]:py-16">
-    <a href="/#work" class="inline-flex min-h-11 items-center gap-2 font-mono text-sm text-fg-dim no-underline hover:text-accent">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="size-4" aria-hidden="true">
-        <path d="M13 8H3m4-4L3 8l4 4" />
-      </svg>
-      Back to work
-    </a>
+    <nav aria-label="Breadcrumb" class="flex flex-wrap items-center font-mono text-xs text-fg-dim sm:text-sm">
+      <span class="inline-flex items-center">
+        <a href="/" class="inline-flex min-h-11 items-center hover:text-accent hover:underline">~/davis-mccracken</a>
+        <span aria-hidden="true">/</span>
+        <a href="/#work" class="inline-flex min-h-11 items-center hover:text-accent hover:underline">work</a>
+        <span aria-hidden="true">/</span>
+      </span>
+      <span aria-current="page" class="case-id relative min-w-0 wrap-anywhere text-fg" style={`--case-id-chars: ${entry.id.length}`}>
+        <span class="block">{entry.id}</span>
+      </span>
+    </nav>
 
     <article class="mt-8">
       <header>
-        <h1 class="text-balance text-3xl leading-tight font-semibold tracking-tight text-fg sm:text-5xl">{title}</h1>
+        <h1 class="font-serif text-[clamp(2.5rem,7vw,4rem)] leading-none tracking-tight text-balance text-fg" transition:name={`title-${entry.id}`}>{title}</h1>
         <div class="mt-3 flex flex-wrap items-center gap-3 font-mono text-xs text-fg-dim tabular-nums">
-          <KindPill kind={kind} label={kindLabel} />
+          <KindPill kind={kind} label={kindLabel} transition:name={`pill-${entry.id}`} />
           <time datetime={String(year)}>{year}</time>
         </div>
         <p class="mt-4 max-w-prose text-lg leading-relaxed text-pretty text-fg-dim">{summary}</p>
@@ -82,7 +87,7 @@ const { Content } = await render(entry);
                 <dd class="-order-1 flex flex-wrap items-baseline gap-x-3 gap-y-2">
                   <span class="min-w-0 font-mono text-[clamp(1.75rem,6vw,3rem)] leading-[1.1] tracking-tight text-balance text-fg tabular-nums">{leadImpact.value}</span>
                   {!impactVerified && (
-                    <span class="inline-flex rounded-sm border border-yellow/25 bg-yellow/10 px-1.5 py-0.5 font-mono text-[0.6875rem] leading-none text-yellow">
+                    <span class="inline-flex rounded-sm border border-yellow/25 bg-yellow/10 px-1.5 py-0.5 font-mono text-xs leading-none text-yellow">
                       <span aria-hidden="true">unverified</span>
                       <span class="sr-only">unverified figure</span>
                     </span>
@@ -102,7 +107,7 @@ const { Content } = await render(entry);
                     <dd class="mt-1 flex flex-wrap items-baseline gap-x-2 gap-y-1.5 px-3 pb-3 font-mono text-xs/5 text-fg tabular-nums">
                       <span class="min-w-0 text-pretty">{value}</span>
                       {!impactVerified && (
-                        <span class="inline-flex rounded-sm border border-yellow/25 bg-yellow/10 px-1.5 py-0.5 font-mono text-[0.6875rem] leading-none text-yellow">
+                        <span class="inline-flex rounded-sm border border-yellow/25 bg-yellow/10 px-1.5 py-0.5 font-mono text-xs leading-none text-yellow">
                           <span aria-hidden="true">unverified</span>
                           <span class="sr-only">unverified figure</span>
                         </span>
@@ -170,7 +175,55 @@ const { Content } = await render(entry);
   </div>
 </Base>
 
+<script>
+  document.addEventListener('astro:page-load', () => {
+    for (const link of document.querySelectorAll<HTMLAnchorElement>('.case-body a[href]:not([data-external-link])')) {
+      if (link.origin === location.origin || !/^https?:$/.test(link.protocol)) continue;
+
+      link.target = '_blank';
+      link.relList.add('noopener');
+      link.dataset.externalLink = '';
+      link.insertAdjacentHTML('beforeend', `<svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="ml-1 inline size-3.5">
+        <path d="M4 12l8-8M6 4h6v6" />
+      </svg><span class="sr-only"> (opens in a new tab)</span>`);
+    }
+  });
+</script>
+
 <style>
+  @media (prefers-reduced-motion: no-preference) and (scripting: enabled) {
+    .case-id {
+      --case-id-duration: min(440ms, calc(var(--case-id-chars) * 20ms));
+    }
+    .case-id > span {
+      animation: case-id-reveal var(--case-id-duration) steps(var(--case-id-chars));
+    }
+    .case-id::after {
+      position: absolute;
+      inset-block-start: 0.15em;
+      inset-inline-start: 0;
+      inline-size: 1px;
+      block-size: 1em;
+      background: var(--color-accent);
+      opacity: 0;
+      content: '';
+      animation:
+        case-id-travel var(--case-id-duration) steps(var(--case-id-chars)) forwards,
+        case-id-blink 220ms step-end 2;
+    }
+    @keyframes case-id-reveal {
+      from { clip-path: inset(0 100% 0 0); }
+      to { clip-path: inset(0); }
+    }
+    @keyframes case-id-travel {
+      to { transform: translateX(calc(var(--case-id-chars) * 1ch)); }
+    }
+    @keyframes case-id-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+  }
+
   /* Rendered Markdown: prose stays at reading width; screenshots and code may use the full column. */
   .case-body :global(:is(p, ul, ol, h2, h3, small)) {
     max-width: 65ch;
@@ -190,7 +243,7 @@ const { Content } = await render(entry);
     font-weight: 600;
     color: var(--color-fg);
   }
-  .case-body :global(p) {
+  .case-body :global(:is(p, li)) {
     text-wrap: pretty;
   }
   .case-body :global(:is(p, ul, ol, pre, img) + :is(p, ul, ol, pre, img)) {

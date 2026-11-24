@@ -4,10 +4,9 @@ const refs = { work: 'A1', about: 'B1', contact: 'C1' };
 interface Props {
   id: keyof typeof refs;
   title: string;
-  meta?: string;
 }
 
-const { id, title, meta } = Astro.props;
+const { id, title } = Astro.props;
 const heading = `${id}-heading`;
 ---
 
@@ -16,7 +15,6 @@ const heading = `${id}-heading`;
     <h2 id={heading} class="text-lg font-semibold tracking-tight">
       <span aria-hidden="true" class="mr-3 font-mono text-xs font-medium text-comment">{refs[id]}</span>{title}
     </h2>
-    {meta && <p class="font-mono text-xs text-fg-dim">{meta}</p>}
   </header>
   <slot />
 </section>

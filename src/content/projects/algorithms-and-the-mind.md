@@ -30,4 +30,4 @@ Recommendation algorithms decide most of what we read and watch online, and they
 
 I build systems that decide what people see, even if it's only a dashboard or a donor list. This project is why I care about transparency in those systems, and about tools that serve the people using them rather than steer them.
 
-[Read the full paper →](https://docs.google.com/document/d/e/2PACX-1vR4gqt-bhFhq1AitgC1ukITVtVb44jSOfDRoiT_mp3_oHr1R0R5Ik224twF8QlIsg/pub)
+[Read the full paper](https://docs.google.com/document/d/e/2PACX-1vR4gqt-bhFhq1AitgC1ukITVtVb44jSOfDRoiT_mp3_oHr1R0R5Ik224twF8QlIsg/pub)
