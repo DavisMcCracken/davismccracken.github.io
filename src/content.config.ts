@@ -7,7 +7,7 @@ const projects = defineCollection({
   schema: z.object({
     title: z.string(),
     summary: z.string(),
-    kind: z.enum(['excel', 'code', 'algo']),
+    kind: z.enum(['excel', 'code', 'writing']),
     kindLabel: z.string(),
     year: z.number().int(),
     order: z.number().int().default(0),

@@ -1,6 +1,6 @@
 ---
 interface Props {
-  kind: 'excel' | 'code' | 'algo';
+  kind: 'excel' | 'code' | 'writing';
   label: string;
   class?: string;
 }
@@ -10,7 +10,7 @@ const { kind, label, class: className } = Astro.props;
 const styles = {
   excel: 'border-green/25 bg-green/10 text-green',
   code: 'border-blue/25 bg-blue/10 text-blue',
-  algo: 'border-orange/25 bg-orange/10 text-orange',
+  writing: 'border-cyan/25 bg-cyan/10 text-cyan',
 };
 ---
 
