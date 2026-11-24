@@ -4,20 +4,18 @@ import Base from '../layouts/Base.astro';
 import About from '../components/home/About.astro';
 import Contact from '../components/home/Contact.astro';
 import Hero from '../components/home/Hero.astro';
-import Now from '../components/home/Now.astro';
 import WorkSheet from '../components/home/WorkSheet.astro';
 
 const resumeHref = existsSync('public/resume.pdf') ? '/resume.pdf' : undefined;
 const availability = 'Open to data analyst and other tech roles, plus freelance web development and design.';
 ---
 
-<Base description="Davis McCracken, a Louisville database coordinator building data pipelines, automating reports, and exploring statistical models.">
+<Base description="Davis McCracken, a Louisville database coordinator turning manual processes into automated Excel, Power Query and VBA tools.">
   <div class="flex flex-col gap-12 sm:gap-14">
     <!-- TODO(copy): Review the shared availability wording in Hero and Contact. -->
     <Hero availability={availability} resumeHref={resumeHref} />
     <WorkSheet />
     <About />
-    <Now />
     <Contact availability={availability} resumeHref={resumeHref} />
   </div>
 </Base>
